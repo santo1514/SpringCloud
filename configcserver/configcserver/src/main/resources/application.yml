@@ -1,0 +1,21 @@
+server:
+    port: 7777
+
+spring:
+    profiles:
+        active: qa
+    application:
+        name: config-server
+    cloud:
+        config:
+            server:
+                git:
+                    uri: https://github.com/santo1514/microservices-config.git
+                    default-label: main
+                    clone-on-start: true
+eureka:
+    instance:
+        instance-id: "${spring.application.name}:${random.value}"
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URL}

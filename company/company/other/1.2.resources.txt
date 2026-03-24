@@ -1,0 +1,45 @@
+
+dockerfile
+-------
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+
+index.html
+-------
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>debuggeando ideas</title>
+    <style>
+      h1 {
+        font-weight: lighter;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+        This is debuggeando ideas
+    </h1>
+  </body>
+</html>
+
+postgres con docker
+----------
+
+docker run --name mt-first-postges -p 5432:5432 -e POSTGRES_DB=test -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=secret -v ./sql:/var/lib/postgresql/data -d postgres:16.1
+
+sql script
+---------
+
+CREATE TABLE users (
+  user_id serial PRIMARY KEY,
+  username VARCHAR ( 50 ) UNIQUE NOT null
+  )
+  
+INSERT INTO users (username) values ('test')
+  
+SELECT * from users u ;

@@ -1,0 +1,5 @@
+FROM openjdk:21-ea-jdk-slim
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENV EUREKA_URL=http://ms-registryserver:8761/eureka/
+ENTRYPOINT ["java","-jar","/app.jar"]

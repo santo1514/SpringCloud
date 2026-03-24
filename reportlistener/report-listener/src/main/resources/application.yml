@@ -1,0 +1,34 @@
+spring:
+    application:
+        name: report-listener
+    profiles:
+        default: default
+    cloud:
+        stream:
+            kafka:
+                binder:
+                    brokers: ${KAFKA_URL}
+            function:
+                bindings:
+                    consumerReport-in-0:
+                        destination: consumerReport
+    data:
+        mongodb:
+            authentication-database: admin
+            host: ${MONGO_HOST}
+            port: 27017
+            username: sa
+            password: sa
+server:
+    port: 8083
+eureka:
+    instance:
+        instance-id: "${spring.application.name}:${random.value}"
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URL}
+logging:
+    level:
+        org.springframework.cloud.openfeign: DEBUG
+        org.springframework.cloud.loadbalancer: DEBUG
+        com.netflix.discovery: DEBUG

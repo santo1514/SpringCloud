@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: company.fallback
+    profiles:
+        default: default
+    config:
+        import: "optional:configserver:${CONFIG_SERVER_URL}"
+server:
+    servlet:
+        context-path: /company.fallback
+    port: 8787
+eureka:
+    instance:
+        instance-id: "${spring.application.name}:${random.value}"
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URL}

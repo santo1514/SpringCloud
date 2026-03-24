@@ -1,0 +1,32 @@
+spring:
+    application:
+        name: msreport
+    profiles:
+        default: default
+    config:
+        import: "optional:configserver:${CONFIG_SERVER_URL}"
+    cloud:
+        stream:
+            kafka:
+                binder:
+                    brokers: ${KAFKA_URL}
+            function:
+                bindings:
+                    consumerReport-out-0:
+                        destination: consumerReport
+        
+server:
+    servlet:
+        context-path: /msreport
+    port: 9999
+eureka:
+    instance:
+        instance-id: "${spring.application.name}:${random.value}"
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URL}
+logging:
+    level:
+        org.springframework.cloud.openfeign: DEBUG
+        org.springframework.cloud.loadbalancer: DEBUG
+        com.netflix.discovery: DEBUG

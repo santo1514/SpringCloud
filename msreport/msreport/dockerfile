@@ -1,0 +1,7 @@
+FROM openjdk:21-ea-jdk-slim
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENV EUREKA_URL=http://ms-registryserver:8761/eureka/
+ENV CONFIG_SERVER_URL=http://ms-config-server:7777
+ENV KAFKA_URL=msg-broker:9092
+ENTRYPOINT ["java","-jar","/app.jar"]
